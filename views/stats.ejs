@@ -1,0 +1,129 @@
+<%- include("partials/header") %> <%- include("partials/headTop") %>
+
+<link rel="stylesheet" href="/stylesheets/main.css" />
+<link rel="stylesheet" href="/stylesheets/wallet.css" />
+<link rel="stylesheet" href="/stylesheets/stats.css" />
+<%- include("partials/headBottom") %>
+
+<section class="container-main">
+  <%- include("partials/sideNavMainHead") %>
+  <a class="nav-link" href="/main/<%= user_id %>"
+    ><li class="nav-link-li"><i class="fas fa-home"></i> Main</li></a
+  >
+  <a class="nav-link" href="/main/<%= user_id %>/notes"
+    ><li class="nav-link-li"><i class="far fa-clipboard"></i> Notes</li></a
+  >
+  <a
+    class="nav-link"
+    href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>"
+    ><li class="nav-link-li"><i class="fas fa-wallet"></i> Wallet</li></a
+  >
+  <a
+    class="nav-link"
+    href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/stats"
+    ><li class="nav-link-li"><i class="fas fa-chart-area"></i> Stats</li></a
+  >
+  <a
+    class="nav-link"
+    href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/history"
+    ><li class="nav-link-li"><i class="fas fa-history"></i> History</li></a
+  >
+  <%-include("partials/sideNavMainFoot") %>
+  <div>
+    <!-- must remain empty -->
+  </div>
+  <div style="text-align: start">
+    <div class="analytics-overview">
+      <div class="box-heading">
+        <h1 class="box-title">
+          <i class="far fa-chart-bar"></i> Analytics Overview for whole period
+        </h1>
+        <h4>
+          <a class="report" href="/main/<%= user_id %>/stats/<%= wallet_id %>"
+            ><i class="fas fa-file-pdf"></i> Get full report</a
+          >
+        </h4>
+      </div>
+      <div class="stats-mini">
+        <div class="stats-data">
+          <h2><%= total %></h2>
+          <h3 class="history-info">Total income</h3>
+          <h5 class="history-currency"><%= currency %></h5>
+        </div>
+        <div class="stats-data">
+          <h2><%= average_income %></h2>
+          <h3 class="history-info">Average income</h3>
+          <h5 class="history-currency"><%= currency %></h5>
+        </div>
+
+        <div class="stats-data">
+          <h2><%= total - total_exp %></h2>
+          <h3 class="history-info">Total Balance</h3>
+          <h5 class="history-currency"><%= currency %></h5>
+        </div>
+        <div class="stats-data">
+          <h2><%= total_exp %></h2>
+          <h3 class="history-info">Total expense</h3>
+          <h5 class="history-currency"><%= currency %></h5>
+        </div>
+        <div class="stats-data-last">
+          <h2><%= average_expense %></h2>
+          <h3 class="history-info">Average expense</h3>
+          <h5 class="history-currency"><%= currency %></h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="line-chart-div">
+      <svg id="line-chart-inc" width="750" height="350"></svg>
+      <div class="text-data-line-inc">
+        <h3 class="text-data-total">
+          Total Income: <%= total %> <%= currency %>
+        </h3>
+        <h3 class="text-data-total">
+          Current Balance: <%= total - total_exp %> <%= currency %>
+        </h3>
+      </div>
+    </div>
+
+    <div class="bar-chart-div">
+      <svg id="bar-chart-income" width="650" height="300"></svg>
+      <div class="text-data">
+        <h3 class="text-data-total">
+          Total Income: <%= total %> <%= currency %>
+        </h3>
+      </div>
+
+    </div>
+
+    <div class="line-chart-div">
+      <svg id="line-chart-expense" width="750" height="350"></svg>
+      <div class="text-data-line-exp">
+        <div class="text-data">
+          <h3 class="text-data-total">
+            Total Expense: <%= total_exp %> <%= currency %>
+          </h3>
+        </div>
+        <h3 class="text-data-total">
+          Current Balance: <%= total - total_exp %> <%= currency %>
+        </h3>
+      </div>
+    </div>
+
+    <div class="bar-chart-div">
+      <svg id="bar-chart-expense" width="650" height="300"></svg>
+      <div class="text-data-exp">
+        <div class="text-data">
+          <h3 class="text-data-total">
+            Total Expense: <%= total_exp %> <%= currency %>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<p hidden id="income_data"><%= income_path %></p>
+
+<script src="/js/d3.min.js"></script>
+<script src="/js/d3.js"></script>
+<%- include("partials/footer") %>

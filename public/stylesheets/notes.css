@@ -1,0 +1,145 @@
+.notes-container{
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: center;
+}
+
+.notes-form-div{
+    width: 60%;
+    margin: 2.5% auto;
+    background-color: white;
+    border-radius: 10px;
+    color: #5e5e5e;
+    text-align: center;
+    border: 1px solid #b9b9b9;
+}
+
+.notes-form-title{
+    margin: 1.9%;
+}
+
+.notes-input-group{
+    width: 90%;
+    margin: 1.5% 0 1.5% 5%;
+}
+
+.notes-input-text{
+    width: 90%;
+    height: 45px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #5e5e5e;
+    padding-left: 1.2%;
+}
+
+.notes-input-textarea{
+    width: 90%;
+    height: 45px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #5e5e5e;
+    padding: 1.2%;
+}
+
+.notes-input-text:hover, .notes-input-textarea:hover{
+    background-color: #daf6fcea;
+    transition-duration: 0.7s;
+}
+
+.notes-form-btn{
+    margin: 2%;
+    background-color: #3f4441;
+    text-decoration: none;
+    color: white;
+    width: 80px;
+    height: 30px;
+    transition-duration: 0.2s;
+    size: 1.2rem;
+    cursor: pointer;
+}
+
+.notes-form-btn:hover{
+    background-color: #e7a61a;
+}
+
+.notes-section{
+    margin: 0;
+    padding: 0;
+    color: #3f4441;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.note-box{
+    text-align: start;
+    background-color: white;
+    border-radius: 10px;
+    margin: 1.5% 15%;
+    padding: 2.5%;
+    overflow-x: auto;
+    border: 1px solid #b9b9b9;
+}
+
+.note-box-header{
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr;
+    border-bottom: 1px solid #b9b9b9;
+}
+
+.note-title{
+    font-weight: 400;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.note-date{
+    font-size: 0.7em;
+    margin: 0;
+    padding-top: 1.5%;
+}
+
+.note-text{
+    font-size: 1.2em;
+    white-space: pre-line;
+}
+
+.note-buttons{
+    justify-self: end;
+}
+
+.note-delete{
+    background-color: white;
+    border: none;
+    color: tomato;
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 30%;
+}
+
+.note-edit{
+    background-color: white;
+    border: none;
+    color: teal;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.note-delete:hover,
+.note-edit:hover{
+    color: #3f4441;
+    transition-duration: 0.5s;
+}
+
+.open{
+    display: block;
+}
+
+.close{
+    display: none;
+} 

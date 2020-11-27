@@ -1,0 +1,105 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 0.5%;
+    padding: 0.2%;
+}
+
+.btn{
+    background-color: #162447;
+    text-decoration: none;
+    color: white;
+    width: 80px;
+    height: 30px;
+    transition-duration: 0.2s;
+    margin: 2.5% 0;
+    size: 1.2rem;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border: none;
+}
+
+.btn-logout{
+    background-color: #162447;
+    text-decoration: none;
+    color: white;
+    width: 80px;
+    height: 30px;
+    transition-duration: 0.2s;
+    margin: 2.5% 0;
+    size: 1.2rem;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border: none;
+}
+
+.btn-logout:hover{
+    color: #e7a61a;
+}
+
+.btn:hover{
+    background-color: #e7a61a;
+    color: white;
+}
+
+
+.active{
+    background-color: #acacac3a;
+    color: #e7a61a;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 674px ){
+    .nav-link{
+      color: #f4f4f4;
+      text-decoration: none;
+      font-size: 1.05em;
+    }
+
+    .active{
+        background-color: #acacac3a;
+        color: #e7a61a;
+        text-decoration: none;
+        font-size: 1.05em;
+    }
+
+    .nav-link-li{
+        margin-bottom: 10%;
+        border-bottom: 1px solid #f4f4f4;
+        font-size: 1.05em;
+      }
+
+      .btn{
+        background-color: #162447;
+        text-decoration: none;
+        color: white;
+        width: 55px;
+        height: 25px;
+        transition-duration: 0.2s;
+        margin: 2.5% 0;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .btn-logout{
+        background-color: #162447;
+        text-decoration: none;
+        color: white;
+        width: 55px;
+        height: 25px;
+        transition-duration: 0.2s;
+        margin: 2.5% 0;
+        border: none;
+        cursor: pointer;
+    }
+
+    
+  }

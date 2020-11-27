@@ -1,0 +1,165 @@
+<%- include("partials/header") %> <%- include("partials/headTop") %>
+<link rel="stylesheet" href="../../stylesheets/main.css" />
+<%- include("partials/headBottom") %>
+
+
+  <section class="container-main">
+    <%- include("partials/sideNavMainHead") %>
+    <a class="nav-link" href="/main/<%= user_id %>"
+      ><li class="nav-link-li"><i class="fas fa-home"></i> Main</li></a
+    >
+    <a class="nav-link" href="/main/<%= user_id %>/notes"
+      ><li class="nav-link-li">
+        <i class="far fa-clipboard"></i> Notes
+      </li></a
+    >
+   
+    <%- include("partials/sideNavMainFoot") %>
+    <div>
+      <!-- must remain empty -->
+    </div>
+    <main class="body-content">
+      <button nonce="r@nd0m" id="modal-btn" class="button">
+        <i class="fas fa-plus-circle"></i> Add a new wallet
+      </button>
+
+      <!-- make modal out of the form -->
+      <!-- modal starts here -->
+      <div id="my-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>New Wallet</h2>
+          </div>
+          <div class="modal-body">
+            <form action="<%= path %>/wallet" method="POST">
+              <div class="input-group">
+                <label class="input-group-input" for="name">Wallet name</label>
+                <input
+                  class="input-group-input"
+                  type="text"
+                  id="name"
+                  name="wallet[name]"
+                  placeholder="name of the wallet..."
+                  required
+                />
+              </div>
+              <div class="input-group">
+                <div class="input-group">
+                  <label class="input-group-input" for="inputGroupSelect01"
+                    >Currency</label
+                  >
+                </div>
+                <select
+                  name="wallet[currency]"
+                  class="input-group-input"
+                  id="inputGroupSelect01"
+                >
+                  <option selected>Choose...</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="JPY">JPY</option>
+                  <option value="GBP">GBP</option>
+                  <option value="RUB">RUB</option>
+                  <option value="UZS">UZS</option>
+                  <option value="INR">INR</option>
+                  <option value="TRY">TRY</option>
+                </select>
+              </div>
+              <button class="btn">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+
+      <section class="container-content">
+        <!-- shows wallets -->
+
+       
+    
+
+        <% wallet.forEach((el)=>{ %>
+          <!-- total income -->
+          <% let income_arr = [0, ] %> 
+              <%let current = 0; %>
+              <%el.incomes.forEach(i => {%> 
+              <% current =+ i.IncomeAmount%> 
+              <%income_arr.push(current) %> 
+          <% }); %> 
+        <% const total_income = income_arr.reduce((a, b) => a+b) %>
+
+         <!-- total expense -->
+         <% let expense_arr = [0, ] %> 
+         <%let current_exp = 0; %>
+         <%el.expenses.forEach(e => {%> 
+         <% current_exp =+ e.expenseAmount %> 
+         <%expense_arr.push(current_exp) %> 
+     <% }); %> 
+   <% const total_expense = expense_arr.reduce((c, d) => c+d) %>
+        <div class="box-wallet">
+          <a
+            class="show"
+            href="/main/<%= user_id %>/wallet/<%= el._id %>/<%= el.name %>"
+          >
+            <h3 class="box-wallet-title"><i class="fas fa-wallet"></i> <%= el.name %></h3>
+            <h4 class="box-wallet-title"><%= el.currency %></h4>
+            <h4 class="box-wallet-title"><%= total_income - total_expense %> <%= el.currency %></h4>
+            <div class="clickables">
+              <a
+                class="clickable-btn edit"
+                href="/main/<%= user_id %>/wallet/<%= el._id %>"
+                type="button"
+                ><i class="far fa-edit"></i
+              ></a>
+              <form
+                class="clickable-btn delete"
+                action="/main/<%= user_id %>/wallet/<%= el._id %>?_method=DELETE"
+                method="POST"
+              >
+                <button
+                  onclick="return confirm('Are you sure you want to delete this item?');"
+                  class="delete"
+                >
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </form>
+            </div>
+          </a>
+        </div>
+        <%}) %>
+      </section>
+    </main>
+  </section>
+
+  <script nonce="r@nd0m">
+    // Get DOM Elements
+    const modal = document.querySelector("#my-modal");
+    const modalBtn = document.querySelector("#modal-btn");
+    const closeBtn = document.querySelector(".close");
+
+    // Events
+    modalBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    window.addEventListener("click", outsideClick);
+
+    // Open
+    function openModal() {
+      modal.style.display = "block";
+    }
+
+    // Close
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    // Close If Outside Click
+    function outsideClick(e) {
+      if (e.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+
+<%- include("partials/footer") %>

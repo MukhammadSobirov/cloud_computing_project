@@ -1,0 +1,109 @@
+body{
+margin: 0;
+padding: 0;
+width: 100%;
+}
+
+.container-landing{
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 0.5%;
+    padding: 0.2%;
+}
+
+.logo-div-landing{
+    display: grid;
+    grid-template-columns: 20% 30% 50%;
+    border-bottom: 0.5px solid #3f4441;
+}
+
+.logo-self-landing{
+    width: 280px;
+}
+
+.title-landing{
+    padding: 0 0 0 30px;
+    font-size: 1.8rem;
+    color: #3f4441;
+}
+
+.box-landing{
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 5% 25%;
+    height: 300px;
+}
+
+
+.btn-signup{
+    background-color: #3f4441;
+    text-decoration: none;
+    color: white;
+    width: 150px;
+    height: 50px;
+    padding-top: 3px;
+    font-size: 1.5rem;
+}
+
+.btn-signup:hover{
+    background-color: #e7a61a;
+    text-decoration: none;
+    color: white;
+    width: 150px;
+    height: 50px;
+    padding-top: 3px;
+    font-size: 1.5rem;
+    transition-duration: 0.2s;
+}
+
+.btn-login{
+    background-color: #3f4441;
+    text-decoration: none;
+    color: white;
+    width: 150px;
+    height: 50px;
+    padding-top: 3px;
+    font-size: 1.5rem;
+}
+
+.btn-login:hover{
+    background-color: #e7a61a;
+    text-decoration: none;
+    color: white;
+    width: 150px;
+    height: 50px;
+    padding-top: 3px;
+    font-size: 1.5rem;
+    transition-duration: 0.2s;
+}
+
+@media screen and (max-width: 1266px) {
+    .logo-div-landing{
+        display: grid;
+        grid-template-columns: 100%;
+        border-bottom: 0.5px solid #3f4441;
+    }
+
+    .logo-self-landing{
+        width: 30%;
+    }
+
+    .title-landing{
+        padding: 0 0 0 3%;
+        font-size: 1.2rem;
+        color: #3f4441;
+    }
+
+    .box-landing{
+        align-items: center;
+        justify-items: center;
+        text-align: center;
+        display: grid;
+        grid-template-columns: 100%;
+        margin: 5% 25%;
+        height: 100%;
+    }
+}

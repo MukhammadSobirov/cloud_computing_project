@@ -1,0 +1,52 @@
+<%- include("partials/header") %> <%- include("partials/headTop") %>
+<link rel="stylesheet" href="/stylesheets/main.css" />
+<%- include("partials/headBottom") %>
+
+
+  <section class="container-main">
+    <%- include("partials/sideNavMainHead") %>
+    <a class="nav-link" href="/main/<%= user_id %>"
+      ><li class="nav-link-li"><i class="fas fa-home"></i> Main</li></a
+    >
+    <a class="nav-link" href="/main/<%= user_id %>"
+      ><li class="nav-link-li">
+        <i class="far fa-clipboard"></i> Notes
+      </li></a
+    >
+    
+    <%- include("partials/sideNavMainFoot") %>
+    <div>
+        <!-- must remain empty -->
+      </div>
+      <main class="body-content">
+    <form action="<%= path %>?_method=PUT" method="POST" class="modal-body">
+      <h3>Wallet Name: <%= wallet.name %></h3>
+      <div class="input-group">
+        <label class="input-group-input" for="name">Name of the wallet</label>
+        <input class="input-group-input"
+          type="text"
+          id="name"
+          name="wallet[name]"
+          value="<%= wallet.name %> "
+          required
+        />
+      </div>
+      <div class="input-group">
+        <div>
+          <label class="input-group-input" for="inputGroupSelect01">Currency</label>
+        </div>
+        <select class="input-group-input" name="wallet[currency]" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option value="$">$</option>
+          <option value="TL">TL</option>
+          <option value="Rubble">Rubble</option>
+          <option value="UZS">UZS</option>
+          <option value="euro">euro</option>
+        </select>
+      </div>
+      <button  class="btn">Submit</button>
+    </form>
+  </section>
+</main>
+
+<%- include("partials/footer") %>

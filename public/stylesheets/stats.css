@@ -1,0 +1,158 @@
+.bar-chart-div,
+.line-chart-div {
+  border-radius: 10px;
+  margin: 2.5% 1.5% 2.5% 0;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #b9b9b9;
+}
+
+.line-chart-div {
+  border-radius: 10px;
+  margin: 2.5% 1.5% 2.5% 0;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #b9b9b9;
+}
+
+.text-data-exp,
+.text-data-line-exp,
+.text-data {
+  padding-top: 1.2%;
+}
+
+.text-data-total{
+    color: #635f5d;
+}
+
+.text-data-text {
+  color: rgb(29, 29, 29);
+  font-size: 0.9em;
+}
+
+text {
+  font-size: 1.5em;
+}
+
+.tick text {
+  font-size: 1.2em;
+  color: #635f5d;
+}
+
+.tick line {
+  stroke: #c0c0bb;
+}
+
+.bar-chart-title {
+  padding: 2.5% 0 2.5% 2.5%;
+  fill: #635f5d;
+  font-size: 2em;
+}
+
+.xAxis-title {
+  fill: #635f5d;
+  font-size: 2em;
+}
+
+.line-path {
+  fill: none;
+  stroke: rgb(255, 99, 97);
+  stroke-width: 3;
+  stroke-linejoin: miter;
+}
+
+.line-path-inc {
+  fill: none;
+  stroke: rgb(29, 29, 29);
+  stroke-width: 3;
+  stroke-linejoin: miter;
+}
+
+.axis-label {
+  font-size: 1.5em;
+  fill: #8e8883;
+}
+
+.title {
+  font-size: 1.5em;
+  fill: #635f5d;
+}
+
+.analytics-overview {
+  display: grid;
+  grid-template-columns: 100%;
+  background-color: white;
+  margin: 2.5%;
+  border-radius: 10px;
+}
+
+.box-heading {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  padding: 0 0 1.5% 1.5%;
+  border-bottom: 1px solid rgba(173, 173, 173, 0.534);
+}
+
+.box-title {
+  color: #3f4441;
+}
+
+.report {
+  color: #3f4441;
+  text-decoration: none;
+}
+
+.report:hover {
+  color: #e7a61a;
+  transition-duration: 0.2s;
+}
+
+.stats-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  text-align: center;
+}
+
+.stats-data {
+  border-right: 0.5px solid rgba(173, 173, 173, 0.534);
+  margin: 0;
+  padding: 0;
+}
+
+.stats-data:hover {
+  background-color: #daf6fcea;
+  transition-duration: 0.7s;
+}
+
+.stats-data-last:hover {
+  background-color: #daf6fcea;
+  transition-duration: 0.7s;
+}
+
+@media screen and (max-width: 700px) {
+  .entries-section {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 100%;
+    border-top: 1px solid #3f4441;
+  }
+
+  .stats-mini {
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: center;
+  }
+
+  .container-two-cols {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+  .stats-data {
+    border-bottom: 0.5px solid rgba(173, 173, 173, 0.534);
+    border-right: none;
+    margin: 0;
+    padding: 0;
+  }
+}

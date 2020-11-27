@@ -1,0 +1,145 @@
+<%- include("partials/header") %> <%- include("partials/headTop") %>
+<link rel="stylesheet" href="../../stylesheets/main.css" />
+<link rel="stylesheet" href="../../stylesheets/notes.css" />
+<%- include("partials/headBottom") %>
+
+<section class="container-main">
+  <%- include("partials/sideNavMainHead") %>
+  <a class="nav-link" href="/main/<%= user_id %>"
+    ><li class="nav-link-li"><i class="fas fa-home"></i> Main</li></a
+  >
+  <a class="nav-link" href="/main/<%= user_id %>/notes"
+    ><li class="nav-link-li"><i class="far fa-clipboard"></i> Notes</li></a
+  >
+
+  <%- include("partials/sideNavMainFoot") %>
+
+  <div>
+    <!-- must remain empty -->
+  </div>
+
+  <div class="notes-container">
+    <div class="notes-form-div">
+      <h3 class="notes-form-title">Add notes</h3>
+      <form action="/main/<%= user_id %>/notes" method="POST">
+        <div class="notes-input-group">
+          <input
+            class="notes-input-text"
+            type="text"
+            id="title"
+            name="notes[title]"
+            placeholder="Title"
+          />
+        </div>
+        <div class="notes-input-group">
+          <textarea
+            class="notes-input-textarea"
+            name="notes[text]"
+            id="text"
+            placeholder="Text"
+            required
+          ></textarea>
+        </div>
+        <button class="notes-form-btn">Save</button>
+      </form>
+    </div>
+
+    <section class="notes-section">
+      <% let id = 0; %> <% notes.reverse().forEach(n => {%>
+
+      <div class="note-box">
+        <div class="note-box-header">
+          <h3 class="note-title"><%= n.title %></h3>
+          <div></div>
+          <div class="note-buttons">
+            <button
+              id="<%= id %>"
+              onclick="openForm(this.id)"
+              class="note-edit"
+            >
+              <i class="far fa-edit"></i>
+            </button>
+            <form
+              action="/main/<%= user_id %>/notes/<%= n._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button nonce="r@nd0m"
+                onclick="return confirm('Are you sure you want to delete this item?');"
+                class="note-delete"
+              >
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="note">
+          <p class="note-date"><%= n.createdAt %></p>
+          <pre class="note-text"><%= n.text %> </pre>
+        </div>
+
+        <!-- edit mode -->
+        <form
+          class="edit"
+          action="/main/<%= user_id %>/notes/<%= n._id %>?_method=PUT"
+          method="POST"
+          hidden
+        >
+          <div class="notes-input-group">
+            <input
+              class="notes-input-text"
+              type="text"
+              id="title"
+              name="notes[title]"
+              placeholder="Title"
+              value="<%= n.title %>"
+            />
+          </div>
+          <div class="notes-input-group">
+            <textarea
+              class="notes-input-textarea"
+              name="notes[text]"
+              id="text"
+              placeholder="Text"
+              required
+            >
+<%= n.text %> </textarea
+            >
+          </div>
+          <button class="notes-form-btn">Edit</button>
+          <button nonce="r@nd0m" onclick="closeForm()" class="notes-form-btn close-btn">
+            Cancel
+          </button>
+        </form>
+      </div>
+      <% ++id %> <% }) %>
+    </section>
+  </div>
+</section>
+
+<script nonce="r@nd0m">
+
+  const close_btn = document.getElementsByClassName("close-btn");
+
+
+  //open
+  function openForm(id) {
+    var edit_btn = document.getElementById(id);
+    var note_part = document.getElementsByClassName(`note`);
+    var edit_box = document.getElementsByClassName(`edit`);
+    let index = parseFloat(id);
+    note_part[index].classList = "close";
+    edit_box[index].classList = "open";
+  }
+
+
+
+  function closeForm(evt) {
+    evt.preventDefault()
+    note_part[i].classList.toggle("open-form");
+    edit_box[i].classList.toggle("close-note");
+  }
+
+  edit_btn.addEventListener("click", openForm);
+  close_btn.addEventListener("click", closeForm);
+</script>
+<%- include("partials/footer") %>

@@ -1,0 +1,147 @@
+<%- include("partials/header") %> <%- include("partials/headTop") %>
+<link rel="stylesheet" href="/stylesheets/main.css" />
+<link rel="stylesheet" href="/stylesheets/history.css" />
+<%- include("partials/headBottom") %>
+
+
+  <section class="container-main">
+    <%- include("partials/sideNavMainHead") %>
+    <a class="nav-link" href="/main/<%= user_id %>"
+      ><li class="nav-link-li"><i class="fas fa-home"></i> Main</li></a
+    >
+    <a
+    class="nav-link"
+    href="/main/<%= user_id %>/notes"
+    ><li class="nav-link-li"><i class="far fa-clipboard"></i> Notes</li></a
+  >
+    <a
+      class="nav-link"
+      href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>"
+      ><li class="nav-link-li"><i class="fas fa-wallet"></i> Wallet</li></a
+    >
+    <a 
+      class="nav-link"
+      href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/stats"
+      ><li class="nav-link-li"><i class="fas fa-chart-area"></i> Stats</li></a
+    >
+    <a
+      class="nav-link"
+      href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/history"
+      ><li class="nav-link-li"><i class="fas fa-history"></i> History</li></a
+    >
+    <%-include("partials/sideNavMainFoot") %>
+    <div>
+      <!-- must remain empty -->
+    </div>
+    <section class="container-history">
+      <div class="analytics-overview">
+        <div class="box-heading">
+          <h1 class="box-title">
+            <i class="far fa-chart-bar"></i> Analytics Overview for whole period
+          </h1>
+          <h4>
+            <a class="report" href="/main/<%= user_id %>/stats/<%= wallet_id %>"
+              ><i class="fas fa-file-pdf"></i> Get full report</a
+            >
+          </h4>
+        </div>
+        <div class="stats-mini">
+          <div class="stats-data">
+            <h2><%= total %></h2>
+            <h3 class="history-info">Total income</h3>
+            <h5 class="history-currency"><%= currency %></h5>
+          </div>
+          <div class="stats-data">
+            <h2><%= average_income %></h2>
+            <h3 class="history-info">Average income</h3>
+            <h5 class="history-currency"><%= currency %></h5>
+          </div>
+
+          <div class="stats-data">
+            <h2><%= total - total_exp %></h2>
+            <h3 class="history-info">Total Balance</h3>
+            <h5 class="history-currency"><%= currency %></h5>
+          </div>
+          <div class="stats-data">
+            <h2><%= total_exp %></h2>
+            <h3 class="history-info">Total expense</h3>
+            <h5 class="history-currency"><%= currency %></h5>
+          </div>
+          <div class="stats-data-last">
+            <h2><%= average_expense %></h2>
+            <h3 class="history-info">Average expense</h3>
+            <h5 class="history-currency"><%= currency %></h5>
+          </div>
+        </div>
+      </div>
+
+      <!-- Container with 2 columns for Income and Expense -->
+      <section class="container-two-cols">
+        <div class="history-box">
+          <h3 class="history-box-title">
+            <i class="fas fa-plus-square"></i> Incomes
+          </h3>
+          <div class="history-box-data">
+            <div class="history-box-titles">
+              <h4>Index</h4>
+              <h4>Date</h4>
+              <h4>Amount</h4>
+              <h4>Category</h4>
+              <h4>Note</h4>
+            </div>
+
+            <% let inx = 0; %> 
+            <% incomes.reverse().forEach(i => {%>
+
+            <div class="history-data">
+              <p><%= ++inx %></p>
+            
+              <p><%=i.IncomeDate %></p>
+           
+              <p><%=i.IncomeAmount %></p>
+            
+              <p><%=i.incomeCategory %></p>
+            
+              <p><%=i.incomeNote.substring(0, 10) %>...</p>
+            </div>
+
+            <%}) %>
+          </div>
+        </div>
+
+        <div class="history-box">
+          <h3 class="history-box-title">
+            <i class="fas fa-minus-square"></i> Expenses
+          </h3>
+          <div class="history-box-data">
+            <div class="history-box-titles">
+              <h4>Index</h4>
+              <h4>Date</h4>
+              <h4>Amount</h4>
+              <h4>Category</h4>
+              <h4>Note</h4>
+            </div>
+            <% let inx_e = 0; %> 
+            <% expenses.reverse().forEach(e => {%>
+
+            <div class="history-data">
+              <p><%= ++inx_e %></p>
+        
+              <p><%=e.expenseDate %></p>
+           
+              <p><%=e.expenseAmount %></p>
+            
+              <p><%=e.expenseCategory %></p>
+            
+              <p><%=e.expenseNote.substring(0, 10) %>...</p>
+            </div>
+
+            <%}) %>
+          </div>
+        </div>
+      </section>
+    </section>
+  </section>
+
+
+<%- include("partials/footer") %>

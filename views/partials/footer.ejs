@@ -1,0 +1,12 @@
+<script>
+    const currentLocation = location.href;
+    const menuItem = document.querySelectorAll("a")
+    const menuLen = menuItem.length
+    for (let i = 0; i<menuLen; i++){
+        if(menuItem[i].href === currentLocation){
+            menuItem[i].className = "active"
+        }
+    }
+</script>
+</body>
+</html>

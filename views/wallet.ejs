@@ -1,0 +1,384 @@
+<%- include("partials/header") %> <%- include("partials/headTop") %>
+<link rel="stylesheet" href="/stylesheets/main.css" />
+<link rel="stylesheet" href="/stylesheets/wallet.css" />
+<%- include("partials/headBottom") %>
+
+
+  <!-- Formulas start -->
+  <!-- total income -->
+  <% let income_arr = [0, ] %> 
+  <%let current = 0; %>
+  <%wallet.incomes.forEach(el => {%> 
+  <% current =+ el.IncomeAmount%> <%
+  income_arr.push(current) %> <% }); %> 
+  <% const total_income = income_arr.reduce((a, b) => a+b) %>
+
+  <!-- total expese -->
+  <% let expense_arr = [0, ] %> 
+  <%wallet.expenses.forEach(el => {%> 
+  <% current =+ el.expenseAmount%> 
+  <% expense_arr.push(current) %> <% }); %> 
+  <% const total_expense = expense_arr.reduce((a, b) => a+b) %>
+  <!-- Formulas end -->
+
+  <section class="container-main">
+    <%- include("partials/sideNavMainHead") %>
+    <a class="nav-link " href="/main/<%= user_id %>"
+      ><li class="nav-link-li"><i class="fas fa-home"></i> Main</li></a
+    >
+    <a
+    class="nav-link"
+    href="/main/<%= user_id %>/notes"
+    ><li class="nav-link-li"><i class="far fa-clipboard"></i> Notes</li></a
+  >
+    <a
+      class="nav-link"
+      href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>"
+      ><li class="nav-link-li"><i class="fas fa-wallet"></i> Wallet</li></a
+    >
+    <a
+      class="nav-link"
+      href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/stats"
+      ><li class="nav-link-li"><i class="fas fa-chart-area"></i> Stats</li></a
+    >
+    <a
+    class="nav-link"
+    href="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/history"
+    ><li class="nav-link-li"><i class="fas fa-history"></i> History</li></a
+  >
+    <%-include("partials/sideNavMainFoot") %>
+    <div>
+      <!-- must remain empty -->
+    </div>
+    <main class="body-content">
+      <!-- income form start -->
+      <button id="modal-btn-income" class="button-left">
+        <i class="fas fa-plus-circle"></i> Add Income
+      </button>
+      <button id="modal-btn-exp" class="button-right">
+         Add Expense <i class="fas fa-minus-circle"></i>
+      </button>
+
+      <!-- modal starts here -->
+      <div id="my-modal-income" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Add Income</h2>
+          </div>
+          <div class="modal-body">
+            <form
+              action="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/income"
+              method="POST"
+            >
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="amount">Amount</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  placeholder="1.0"
+                  step="0.01"
+                  min="0"
+                  name="income[IncomeAmount]"
+                  id="amount"
+                />
+              </div>
+              <div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01"
+                      >Category</label
+                    >
+                  </div>
+                  <select
+                    name="income[incomeCategory]"
+                    class="custom-select"
+                    id="inputGroupSelect01"
+                  >
+                    <option selected>Choose...</option>
+                    <option value="Salary">Salary</option>
+                    <option value="Reward">Reward</option>
+                    <option value="Loan">Loan</option>
+                    <option value="Service">Service</option>
+                    <option value="Revenue">Revenue</option>
+                    <option value="Dividends">Dividends</option>
+                    <option value="Wage">Wage</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="input-group-prepend input-group mb-3">
+                <label class="input-group-text" for="date">Date</label>
+                <input
+                  class="form-control"
+                  type="date"
+                  id="date"
+                  name="income[IncomeDate]"
+                  required
+                />
+              </div>
+              <div class="input-group input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Note (optional)</span>
+                </div>
+                <textarea
+                  class="form-control"
+                  aria-label="With textarea"
+                  name="income[incomeNote]"
+                ></textarea>
+              </div>
+              <button class="btn">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+
+      <!-- income form end -->
+
+      <!-- expense modal form start -->
+
+      <div id="my-modal-exp" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Add Expense</h2>
+          </div>
+          <div class="modal-body">
+            <form
+              action="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/expense"
+              method="POST"
+            >
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="amount">Amount</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  placeholder="1.0"
+                  step="0.01"
+                  min="0"
+                  name="expense[expenseAmount]"
+                  id="amount"
+                />
+              </div>
+              <div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01"
+                      >Category</label
+                    >
+                  </div>
+                  <select
+                    name="expense[expenseCategory]"
+                    class="custom-select"
+                    id="inputGroupSelect01"
+                  >
+                    <option selected>Choose...</option>
+                    <option value="Eat out">Eat out</option>
+                    <option value="Food Delivery">Food Delivery</option>
+                    <option value="Grocery">Grocery</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Tax">Tax</option>
+                    <option value="Clothes">Clothes</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Education">Education</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Paying wage">Paying wage</option>
+                    <option value="Paying loan">Paying loan</option>
+                    <option value="Sport">Sport</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="input-group-prepend input-group mb-3">
+                <label class="input-group-text" for="date">Date</label>
+                <input
+                  class="form-control"
+                  type="date"
+                  id="date"
+                  name="expense[expenseDate]"
+                  required
+                />
+              </div>
+              <div class="input-group input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Note (optional)</span>
+                </div>
+                <textarea
+                  class="form-control"
+                  aria-label="With textarea"
+                  name="expense[expenseNote]"
+                ></textarea>
+              </div>
+              <button class="btn">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+      <!-- expense form end -->
+      <section class="entries-container">
+        <!-- general info -->
+        <div class="analytics-overview">
+          <div class="box-heading">
+            <h1 class="box-title">
+              <i class="far fa-chart-bar"></i> Analytics Overview for whole period
+            </h1>
+          </div>
+          <div class="stats-mini">
+            <div class="stats-data">
+              <h2><%= total_income %></h2>
+              <h3 class="history-info">Total income</h3>
+              <h5 class="history-currency"><%= wallet.currency %></h5>
+            </div>
+            <div class="stats-data">
+              <h2><%= total_income - total_expense %></h2>
+              <h3 class="history-info">Total Balance</h3>
+              <h5 class="history-currency"><%= wallet.currency  %></h5>
+            </div>
+            <div class="stats-data-last">
+              <h2><%= total_expense %></h2>
+              <h3 class="history-info">Total expense</h3>
+              <h5 class="history-currency"><%= wallet.currency %></h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- Show incomes start -->
+            <section class="container-two-cols">
+              <div class="history-box">
+                <h3 class="history-box-title">
+                  <i class="fas fa-plus-square"></i> Last 7 registered incomes
+                </h3>
+                <div class="history-box-data">
+                  <div class="history-box-titles">
+                    <h4>Index</h4>
+                    <h4>Date</h4>
+                    <h4>Amount</h4>
+                    <h4>Category</h4>
+                    <h4>Note</h4>
+                  </div>
+      
+                  <% let inx = 0; %> 
+                  <% const last_seven_inc = wallet.incomes.reverse().slice(0, 7); %> 
+                  <% last_seven_inc.forEach(i => {%> 
+      
+                  <div class="history-data">
+                    <p><%= ++inx %></p>
+                  
+                    <p><%=i.IncomeDate %></p>
+                 
+                    <p><%=i.IncomeAmount %></p>
+                  
+                    <p><%=i.incomeCategory %></p>
+                  
+                    <p><%=i.incomeNote.substring(0, 10) %>...</p>
+                  </div>
+                  <form action="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/income/<%= i._id %>?_method=DELETE" method="POST">
+                    <button class="btn" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                </form>
+                  <%}) %>
+                </div>
+              </div>
+      <!-- Show incomes end -->
+
+<!-- Show expenses start -->
+              <div class="history-box">
+                <h3 class="history-box-title">
+                  <i class="fas fa-minus-square"></i> Last 7 registered expenses
+                </h3>
+                <div class="history-box-data">
+                  <div class="history-box-titles">
+                    <h4>Index</h4>
+                    <h4>Date</h4>
+                    <h4>Amount</h4>
+                    <h4>Category</h4>
+                    <h4>Note</h4>
+                  </div>
+                  <% let inx_e = 0; %> 
+                  <% const last_seven_exp = wallet.expenses.reverse().slice(0, 7); %> 
+                  <% last_seven_exp.forEach(e => {%> 
+      
+                  <div class="history-data">
+                    <p><%= ++inx_e %></p>
+              
+                    <p><%=e.expenseDate %></p>
+                 
+                    <p><%=e.expenseAmount %></p>
+                  
+                    <p><%=e.expenseCategory %></p>
+                  
+                    <p><%=e.expenseNote.substring(0, 10) %>...</p>
+                  </div>
+                  <form action="/main/<%= user_id %>/wallet/<%= wallet._id %>/<%= wallet.name %>/expense/<%= e._id %>?_method=DELETE" method="POST">
+                    <button class="btn" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                </form>
+                  <%}) %>
+        
+        <!-- Show expense end -->
+      </div>
+    </div>
+  </section>
+      </section>
+    </main>
+  </section>
+
+  <script>
+    // Get DOM Elements
+    const modal = document.querySelector("#my-modal-income");
+    const modalBtn = document.querySelector("#modal-btn-income");
+    const closeBtn = document.querySelector(".close");
+
+    // Events
+    modalBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    window.addEventListener("click", outsideClick);
+
+    // Open
+    function openModal() {
+      modal.style.display = "block";
+    }
+
+    // Close
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    // Close If Outside Click
+    function outsideClick(e) {
+      if (e.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    //expense modal
+
+    const modal_exp = document.querySelector("#my-modal-exp");
+    const modalBtn_exp = document.querySelector("#modal-btn-exp");
+    const closeBtn_exp = document.querySelector(".close");
+
+    // Events
+    modalBtn_exp.addEventListener("click", openModal_exp);
+    closeBtn_exp.addEventListener("click", closeModal_exp);
+    window.addEventListener("click", outsideClick_exp);
+
+    // Open
+    function openModal_exp() {
+      modal_exp.style.display = "block";
+    }
+
+    // Close
+    function closeModal_exp() {
+      modal_exp.style.display = "none";
+    }
+
+    // Close If Outside Click
+    function outsideClick_exp(e) {
+      if (e.target == modal_exp) {
+        modal_exp.style.display = "none";
+      }
+    }
+  </script>
+
+
+<%- include("partials/footer") %>

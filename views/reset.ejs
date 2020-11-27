@@ -1,0 +1,33 @@
+<%- include("partials/header") %>
+
+<%- include("partials/headTop") %>
+<link rel="stylesheet" href="../../stylesheets/login.css">
+<%- include("partials/headBottom") %>
+
+
+    <section class="container">
+        <div class="logo-div-landing">
+            <a href="/"><img src="../images/Original on Transparent.png" alt="e-Brain logo"
+                    class="logo-self-landing"></a>
+            <h1 class="title-landing"><i class="fas fa-chart-line"></i> Finance Manager</h1>
+        </div>
+
+        <div class="auth-box">
+            <h2 class="auth-box-title"><i class="fas fa-sign-in-alt"></i> Login</h2>
+            <% if (errorMessage) { %>
+            <div class="user-error"><%= errorMessage %></div>
+            <% } %>
+            <form class="login-form" action="/reset" method="POST">
+                <div class="form-control">
+                    <label for="email">E-Mail</label>
+                    <input name="email" id="email">
+                </div>
+  
+                <button class="btn" type="submit">Reset Password</button>
+            </form>
+        </div>
+
+    </section>
+
+
+    <%- include("partials/footer") %>

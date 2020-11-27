@@ -1,0 +1,95 @@
+.logo-div-landing{
+    display: grid;
+    grid-template-columns: 20% 30% 50%;
+    border-bottom: 0.5px solid #3f4441;
+}
+
+.logo-self-landing{
+    width: 280px;
+}
+
+.title-landing{
+    padding: 0 0 0 30px;
+    font-size: 1.8rem;
+    color: #3f4441;
+}
+
+/* auth box */
+.auth-box{
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 5% 25%;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.auth-box-title{
+    color: #3f4441;
+}
+
+.user-error{
+    color: rgb(247, 28, 28);
+    font-size: large;
+}
+
+.form-control{
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 5% 25%;
+    height: 50px;
+    
+}
+
+
+.btn{
+    background-color: #3f4441;
+    text-decoration: none;
+    color: white;
+    width: 80px;
+    height: 30px;
+    transition-duration: 0.2s;
+    margin: 2.5% 0;
+    size: 1.2rem;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #e7a61a;
+    text-decoration: none;
+    color: white;
+    width: 80px;
+    height: 30px;
+    transition-duration: 0.2s;
+    margin: 2.5% 0;
+    size: 1.2rem;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1266px) {
+    .logo-div-landing{
+        display: grid;
+        grid-template-columns: 100%;
+        border-bottom: 0.5px solid #3f4441;
+    }
+
+    .logo-self-landing{
+        width: 30%;
+    }
+
+    .title-landing{
+        padding: 0 0 0 3%;
+        font-size: 1.2rem;
+        color: #3f4441;
+    }
+
+    .auth-box{
+        display: grid;
+        grid-template-columns: 100%;
+        margin: 5% 25%;
+        background-color: white;
+        text-align: center;
+        border-radius: 10px;
+    }
+}

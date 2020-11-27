@@ -1,0 +1,41 @@
+<%- include("partials/header") %>
+
+<%- include("partials/headTop") %>
+<link rel="stylesheet" href="../../stylesheets/signup.css">
+<%- include("partials/headBottom") %>
+
+
+    <section class="container">
+
+        <div class="logo-div-landing">
+            <a href="/"><img src="../images/Original on Transparent.png" alt="e-Brain logo"
+                    class="logo-self-landing"></a>
+            <h1 class="title-landing"><i class="fas fa-chart-line"></i> Finance Manager</h1>
+        </div>
+
+        <div class="auth-box">
+            <h2 class="auth-box-title"><i class="fas fa-user-plus"></i> Signup </h2>
+            <% if (errorMessage) { %>
+            <div class="user-error"><%= errorMessage %></div>
+            <% } %>
+
+            <form class="login-form" action="/signup" method="POST">
+                <div class="form-control">
+                    <label for="email">E-Mail</label>
+                    <input type="email" name="email" id="email" value="<%= oldInput.email %>">
+                </div>
+                <div class="form-control">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" value="<%= oldInput.password %>">
+                </div>
+                <div class="form-control">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword"
+                        value="<%= oldInput.confirmPassword %>">
+                </div>
+                <button class="btn" type="submit">Signup</button>
+            </form>
+        </div>
+    </section>
+
+    <%- include("partials/footer") %>
